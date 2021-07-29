@@ -1,7 +1,6 @@
 class PrototypesController < ApplicationController
-  before_action :authenticate_user!, only: [:index, :show]
-
-
+  before_action :authenticate_user!, only: [:new, :edit, :destroy, :update]
+   
   def index
     @user = User.all
     @prototypes = Prototype.all
@@ -49,6 +48,11 @@ class PrototypesController < ApplicationController
         redirect_to root_path
       end
 
+      def move_to_index
+        unless user_signed_in?
+          redirect_to action: :index
+        end
+      end
      
 
 
